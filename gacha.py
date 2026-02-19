@@ -1,38 +1,53 @@
-import json
 import random
 from datetime import datetime, timezone
 from pathlib import Path
 
-PROMPTS_FILE = Path(__file__).parent / "prompts.json"
+import yaml
+
+PROMPTS_FILE = Path(__file__).parent / "prompts.yaml"
 
 
 def _load_prompts() -> dict:
-    return json.loads(PROMPTS_FILE.read_text())
+    return yaml.safe_load(PROMPTS_FILE.read_text())
 
 
-def _pick_weighted(items: list[dict]) -> str:
-    """Pick an item using weights. Default weight is 0, higher = more likely."""
-    weights = [max(1, 10 + item.get("weight", 0)) for item in items]
-    return random.choices(items, weights=weights, k=1)[0]["name"]
+def _pick_aspects(aspects: list[dict]) -> list[dict]:
+    """Pick 1 or 2 aspects at random. No two aspects may share a category."""
+    first = random.choice(aspects)
+    if random.random() < 0.5:
+        return [first]
+
+    first_category = first.get("category")
+    eligible = [
+        a for a in aspects
+        if a is not first and (first_category is None or a.get("category") != first_category)
+    ]
+    if not eligible:
+        return [first]
+    return [first, random.choice(eligible)]
 
 
-def _pick_rarity(rarities: list[dict]) -> dict:
-    """Pick a rarity using explicit weights. Returns {name, time}."""
-    weights = [r["weight"] for r in rarities]
-    picked = random.choices(rarities, weights=weights, k=1)[0]
-    return {"name": picked["name"], "time": picked["time"]}
+def _resolve_rarity(rarities: list[dict], total_price: int) -> dict:
+    """Find the highest rarity whose price threshold is <= total_price."""
+    # Sort descending by price so we match the highest qualifying tier
+    for r in sorted(rarities, key=lambda r: r["price"], reverse=True):
+        if total_price >= r["price"]:
+            return r
+    return rarities[0]
 
 
 def roll() -> dict:
     prompts = _load_prompts()
 
-    species = _pick_weighted(prompts["species"])
-    element = _pick_weighted(prompts["elements"])
-    rarity = _pick_rarity(prompts["rarities"])
+    aspects = _pick_aspects(prompts["aspects"])
+    total_price = sum(a["price"] for a in aspects)
+    rarity = _resolve_rarity(prompts["rarities"], total_price)
+
+    prompt = " ".join(a["name"] for a in aspects)
 
     return {
         "id": str(int(datetime.now(timezone.utc).timestamp() * 1000)),
-        "prompt": f"{element} {species}",
+        "prompt": prompt,
         "rarity": rarity["name"],
         "time": rarity["time"],
         "created_at": datetime.now(timezone.utc).isoformat(),
@@ -41,5 +56,6 @@ def roll() -> dict:
 
 
 if __name__ == "__main__":
-    for _ in range(5):
-        print(roll())
+    for _ in range(10):
+        r = roll()
+        print(f"{r['rarity']}  {r['prompt']}")

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-Reverse Gacha is a Discord bot where users "pull" randomized art prompts (a species + element combo with a rarity tier) and then complete them by uploading artwork. It uses discord.py slash commands.
+Reverse Gacha is a Discord bot where users "pull" randomized art prompts (1–2 aspects with a rarity tier) and then complete them by uploading artwork. It uses discord.py slash commands.
 
 ## Commands
 
@@ -29,6 +29,6 @@ Requires a `.env` file with `DISCORD_TOKEN` set. Python 3.10+ (uses `X | Y` unio
 ## Architecture
 
 - **bot.py** — Discord client, slash command handlers (`/pull`, `/complete`, `/pulls`), and `GalleryView` (paginated embed viewer with prev/next buttons)
-- **gacha.py** — `roll()` produces a prompt dict (`{id, prompt, rarity, time, created_at, image_path}`) by weighted-random picking a species + element + rarity from `prompts.json`
+- **gacha.py** — `roll()` produces a prompt dict (`{id, prompt, rarity, time, created_at, image_path}`). Picks 1–2 random aspects (no two with the same `category`), sums their prices, and resolves rarity by matching against price thresholds.
 - **storage.py** — JSON-file persistence layer. Pulls stored in `data/pulls.json`, uploaded images saved to `data/images/`
-- **prompts.json** — Data file with `species`, `elements`, and `rarities` arrays. Each entry has a `name` and optional `weight` (higher = more common; default base is 10 for species/elements). Rarities use explicit weights summing to 100.
+- **prompts.yaml** — Data file with `rarities` (each has `name`, `price` threshold, `time`) and `aspects` (each has `name`, `price`, optional `category` and `description`). Rarity is determined by the highest tier whose price threshold is met by the sum of chosen aspect prices.

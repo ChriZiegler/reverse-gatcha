@@ -1,0 +1,156 @@
+rarities:
+  - name: "★☆☆☆"
+    price: 5
+    time: 15 min
+  - name: "★★☆☆"
+    price: 7
+    time: 30 min
+  - name: "★★★☆"
+    price: 10
+    time: 1 hour
+  - name: "✯✯✯✯"
+    price: 15
+    time: 2 hours
+
+aspects:
+  - name: equine
+    price: 1
+    description: Horsey
+    category: species
+  - name: canine
+    price: 1
+    description: Doggy
+    category: species
+  - name: slime
+    price: 5
+    description: Transculscent and gooey
+  - name: crocodilan
+    price: 1
+    description: The aspect of crocodiles, alligators, and caimans
+    category: species
+  - name: lupine
+    price: 1
+    description: The aspect of rabbits and hares
+    category: species
+  - name: horned
+    price: 2
+    description: Bull horns, unicorn horns, antlers, various head projections
+    category: species
+  - name: draconic
+    price: 5
+    description: The highly magical aspects of dragons
+  - name: avian
+    price: 3
+    description: Majestic birds
+    category: species
+  - name: feline
+    price: 1
+    description: The aspects of cats
+    category: species
+  - name: snail
+    price: 3
+    description: Their shells go round and round
+  - name: bear
+    price: 1
+    description: Big, fluffy, and round
+    category: species
+  - name: imp
+    price: 3
+    description: Big ears, big eyes, sharp teeth, full of mischief
+    category: species
+  - name: salmon
+    price: 6
+  - name: raptor
+    price: 1
+    description: Aspect of velociraptors and their ilk
+    category: species
+  - name: snake
+    price: 3
+    description: long and snakey
+    category: species
+  - name: quetzelcoatl
+    price: 7
+  - name: lizard
+    price: 1
+    category: species
+  - name: boar
+    price: 1
+    category: species
+  - name: rat
+    price: 1
+    category: species
+  - name: deer
+    price: 1
+    category: species
+  - name: seal
+    price: 1
+    category: species
+  - name: mustelid
+    price: 1
+    category: species
+  - name: fire
+    price: 5
+  - name: ice
+    price: 5
+  - name: forest
+    price: 5
+  - name: ocean
+    price: 8
+  - name: chocolate
+    price: 8
+  - name: stone
+    price: 5
+  - name: deep sea
+    price: 8
+  - name: galaxy
+    price: 8
+  - name: light
+    price: 5
+  - name: dark
+    price: 5
+  - name: starry
+    price: 5
+  - name: lemon
+    price: 7
+  - name: sky
+    price: 7
+  - name: retro electronic
+    price: 10
+  - name: rainbow
+    price: 8
+  - name: glass
+    price: 8
+  - name: electric
+    price: 5
+  - name: pottery
+    price: 8
+  - name: carousel
+    price: 10
+  - name: mushroom
+    price: 5
+  - name: gold
+    price: 5
+  - name: kidcore
+    price: 10
+  - name: arcade
+    price: 10
+  - name: candy
+    price: 7
+  - name: butterfly
+    price: 7
+  - name: lava
+    price: 7
+  - name: smoke bomb
+    price: 10
+  - name: gemstone
+    price: 10
+  - name: kin tsugi
+    price: 10
+  - name: succulent/cactus
+    price: 5
+  - name: foliage
+    price: 5
+  - name: teeth
+    price: 7
+  - name: treasure
+    price: 10
