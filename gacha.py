@@ -11,10 +11,12 @@ def _load_prompts() -> dict:
     return yaml.safe_load(PROMPTS_FILE.read_text())
 
 
-def _pick_aspects(aspects: list[dict]) -> list[dict]:
+def _pick_aspects(aspects: list[dict], min_price: int = 2) -> list[dict]:
     """Pick 1 or 2 aspects at random. No two aspects may share a category."""
     first = random.choice(aspects)
-    if random.random() < 0.5:
+    need_second = random.random() >= 0.5 or first["price"] < min_price
+
+    if not need_second:
         return [first]
 
     first_category = first.get("category")

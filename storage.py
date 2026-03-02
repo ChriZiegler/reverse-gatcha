@@ -9,7 +9,7 @@ IMAGES_DIR = DATA_DIR / "images"
 def _ensure_dirs():
     DATA_DIR.mkdir(exist_ok=True)
     IMAGES_DIR.mkdir(exist_ok=True)
-    if not PULLS_FILE.exists():
+    if not PULLS_FILE.exists() or PULLS_FILE.read_text().strip() == "":
         PULLS_FILE.write_text("[]")
 
 

@@ -154,3 +154,5 @@ aspects:
     price: 7
   - name: treasure
     price: 10
+  - name: tabby
+    price: 1
