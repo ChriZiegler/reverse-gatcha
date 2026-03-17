@@ -22,7 +22,7 @@ DISCORD_TOKEN=your_token_here
 ## Commands
 
 ```bash
-# Run the bot
+# Run the bot :)
 python3 bot.py
 
 # Test gacha roll logic standalone (prints 5 sample rolls)
