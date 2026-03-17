@@ -8,7 +8,7 @@ PROMPTS_FILE = Path(__file__).parent / "prompts.yaml"
 
 
 def _load_prompts() -> dict:
-    return yaml.safe_load(PROMPTS_FILE.read_text())
+    return yaml.safe_load(PROMPTS_FILE.read_text(encoding="utf-8"))
 
 
 def _pick_aspects(aspects: list[dict], min_price: int = 2) -> list[dict]:
