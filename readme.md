@@ -25,7 +25,7 @@ DISCORD_TOKEN=your_token_here
 # Run the bot :)
 python3 bot.py
 
-# Test gacha roll logic standalone (prints 5 sample rolls)
+# Test gacha roll logic standalone (prints 5 sample rolls) :^)
 python3 gacha.py
 ```
 
