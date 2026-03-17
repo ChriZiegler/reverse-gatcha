@@ -13,7 +13,7 @@
     "rarity": "\u2605\u2606\u2606\u2606",
     "time": "15 min",
     "created_at": "2026-02-19T02:18:54.708584+00:00",
-    "image_path": "/home/christieziegler/dev/reverseGacha/data/images/1771467534708.png"
+    "image_path": "data/images/1771467534708.png"
   },
   {
     "id": "1771467595777",
@@ -21,7 +21,7 @@
     "rarity": "\u2605\u2605\u2606\u2606",
     "time": "30 min",
     "created_at": "2026-02-19T02:19:55.777437+00:00",
-    "image_path": "/home/christieziegler/dev/reverseGacha/data/images/1771467595777.png"
+    "image_path": "data/images/1771467595777.png"
   },
   {
     "id": "1771724067758",
@@ -29,7 +29,7 @@
     "rarity": "\u2605\u2606\u2606\u2606",
     "time": "15 min",
     "created_at": "2026-02-22T01:34:27.758054+00:00",
-    "image_path": "/home/christieziegler/dev/reverseGacha/data/images/1771724067758.png"
+    "image_path": "data/images/1771724067758.png"
   },
   {
     "id": "1772244287914",
@@ -37,7 +37,7 @@
     "rarity": "\u2605\u2605\u2605\u2606",
     "time": "1 hour",
     "created_at": "2026-02-28T02:04:47.914284+00:00",
-    "image_path": "/home/christieziegler/dev/reverseGacha/data/images/1772244287914.jpg"
+    "image_path": "data/images/1772244287914.jpg"
   },
   {
     "id": "1772418023786",

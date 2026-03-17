@@ -10,7 +10,7 @@ from discord import app_commands
 from discord.ui import View, button, Button
 
 from gacha import roll
-from storage import save_pull, get_pull, update_pull, delete_pull, load_pulls, IMAGES_DIR
+from storage import save_pull, get_pull, update_pull, delete_pull, load_pulls, IMAGES_DIR, PROJECT_ROOT, resolve_image_path
 
 DISCORD_TOKEN = os.environ.get("DISCORD_TOKEN", "")
 PLACEHOLDER_IMAGE = Path(__file__).parent / "assets" / "placeholder.png"
@@ -61,7 +61,7 @@ async def complete_command(
 
     await image.save(filepath)
 
-    update_pull(pull_id, {"image_path": str(filepath)})
+    update_pull(pull_id, {"image_path": filepath.relative_to(PROJECT_ROOT).as_posix()})
 
     embed = discord.Embed(title=f"Completed: [{pull['rarity']}] {pull['prompt']}")
     embed.set_image(url=f"attachment://{filename}")
@@ -95,8 +95,9 @@ class GalleryView(View):
 
     def get_file(self) -> discord.File:
         pull = self.pulls[self.index]
-        if pull["image_path"] and Path(pull["image_path"]).exists():
-            return discord.File(pull["image_path"], filename="image.png")
+        abs_path = resolve_image_path(pull["image_path"])
+        if abs_path and abs_path.exists():
+            return discord.File(abs_path, filename="image.png")
         return discord.File(PLACEHOLDER_IMAGE, filename="image.png")
 
     @button(label="Prev", style=discord.ButtonStyle.secondary)
@@ -149,8 +150,9 @@ class GalleryView(View):
         filepath = IMAGES_DIR / filename
 
         await attachment.save(filepath)
-        update_pull(pull["id"], {"image_path": str(filepath)})
-        pull["image_path"] = str(filepath)
+        rel = filepath.relative_to(PROJECT_ROOT).as_posix()
+        update_pull(pull["id"], {"image_path": rel})
+        pull["image_path"] = rel
 
         embed = self.get_embed()
         file = self.get_file()
@@ -200,7 +202,7 @@ async def updateart_command(
         return
 
     # Delete the old image file
-    old_path = Path(pull["image_path"])
+    old_path = resolve_image_path(pull["image_path"])
     if old_path.exists():
         old_path.unlink()
 
@@ -210,7 +212,7 @@ async def updateart_command(
 
     await image.save(filepath)
 
-    update_pull(pull_id, {"image_path": str(filepath)})
+    update_pull(pull_id, {"image_path": filepath.relative_to(PROJECT_ROOT).as_posix()})
 
     embed = discord.Embed(title=f"Updated: [{pull['rarity']}] {pull['prompt']}")
     embed.set_image(url=f"attachment://{filename}")
